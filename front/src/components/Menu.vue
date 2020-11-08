@@ -4,7 +4,7 @@
                 <i class="fa fa-home"></i> DashBoard
             </router-link>
             <router-link to="/register" >
-                <i class="fa fa-paw"></i> Listagem de Animais
+                <i class="fa fa-paw"></i> Listagem de Alunos
             </router-link>
     </aside>
 </template>
