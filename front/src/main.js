@@ -6,9 +6,18 @@ import store from './config/store';
 import './config/bootstrap';
 import vueResource from 'vue-resource';
 import VueProgressBar from 'vue-progressbar'
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
+
+extend('required', {
+  ...required,
+  message: 'Este Campo é Obrigatório!'
+});
 
 
 Vue.use(vueResource)
+
+
 
 
 const options = {
@@ -38,6 +47,7 @@ Vue.component('Footer', require('./components/Footer.vue').default);
 
 new Vue({
   router,
+  ValidationProvider,
   store,
   vuetify,
   render: h => h(App)
