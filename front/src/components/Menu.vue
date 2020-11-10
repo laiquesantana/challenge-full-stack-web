@@ -1,10 +1,7 @@
 <template>
     <aside class="menu" v-show="isMenuVisible" > 
-            <router-link to="/" >
-                <i class="fa fa-home"></i> DashBoard
-            </router-link>
-            <router-link to="/register" >
-                <i class="fa fa-home"></i> Listagem de Alunos
+            <router-link :to="{ name: 'ConsultStudent' }" class="nav-link">
+                <i class="fa fa-home"></i> Alunos
             </router-link>
     </aside>
 </template>
