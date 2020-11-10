@@ -8,7 +8,7 @@ class Student{
 
     async findAll(){
         try{
-            var result = await knex.select(["id","email","academic_record","cpf","name"]).table("students");
+            var result = await knex.select(["id","email","academic_record","cpf","name"]).table("students").orderBy('name')
             return result;
         }catch(err){
             console.log(err);

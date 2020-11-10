@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto" max-width="100%" color="teal" outlined>
+    <v-card class="mx-auto" max-width="100%" color="#49A7C0" outlined>
       <v-list-item three-line>
         <v-list-item-content>
           <h2 v-if="editMode" class="card-title" id="updateStudentLabel">
@@ -16,7 +16,7 @@
               <b-row>
                 <b-col md="12" sm="12">
                   <b-form-group
-                    label="Nome do aluno:"
+                    label="Nome do Aluno:"
                     label-for="students-nome"
                   >
                     <b-form-input
@@ -45,7 +45,7 @@
 
                 <b-col md="12" sm="12">
                   <b-form-group
-                    label="RA do aluno:"
+                    label="RA do Aluno:"
                     label-for="students-academic_record"
                   >
                     <b-form-input
@@ -82,10 +82,10 @@
 
       <v-card-actions>
         <b-col xs="12">
-          <b-button v-if="editMode" variant="primary" @click="updateStudent"
+          <b-button v-if="editMode" variant="success" @click="updateStudent"
             >Atualizar <v-icon>mdi-pencil</v-icon></b-button
           >
-          <b-button v-else variant="primary" @click="createStudent"
+          <b-button v-else variant="success" @click="createStudent"
             >Salvar
             <v-icon dark right> mdi-checkbox-marked-circle </v-icon></b-button
           >

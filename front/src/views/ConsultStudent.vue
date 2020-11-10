@@ -29,7 +29,7 @@
           <v-btn
             :loading="loading1"
             :disabled="loading1"
-            color="blue-grey"
+            color="success"
             class="ma-2 white--text"
             @click="loader = 'loading'"
           >
@@ -39,7 +39,7 @@
 
             <v-col cols="3">
           <v-btn
-            color="blue-grey"
+            color="primary"
             class="ma-2 white--text"
             @click="newStudent"
           >
@@ -61,11 +61,12 @@
       :busy="isBusy"
     >
       <template #cell(actions)="row">
-        <v-btn color="blue" @click="editStudent(row.item)" dark
+          
+        <v-btn class="mr-2" color="warning" @click="editStudent(row.item)" dark
           >Editar
           <v-icon dark right>edit</v-icon>
         </v-btn>
-        <v-btn color="red" @click="deleteStudent(row.item.id)" dark
+        <v-btn color="error" @click="deleteStudent(row.item.id)" dark
           >Deletar
           <v-icon dark right>delete_forever</v-icon>
         </v-btn>
