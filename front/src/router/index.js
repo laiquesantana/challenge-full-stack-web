@@ -1,21 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import RegisterStudent from '../views/RegisterStudent.vue'
+import ConsultStudent from '../views/ConsultStudent.vue'
 import NotFound from '../views/NotFound.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/register',
+    path: '/cadastrar-aluno',
     name: 'RegisterStudent',
     component: RegisterStudent
+  },
+
+  {
+    path: '/consultar-aluno',
+    name: 'ConsultStudent',
+    component: ConsultStudent
   },
 
   {
