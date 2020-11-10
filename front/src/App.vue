@@ -1,5 +1,6 @@
 <template>
-<div id="app" :class="{'hide-menu': !isMenuVisible }">
+  <v-app id="application" :class="{'hide-menu': !isMenuVisible }">
+          <div id="app" :class="{'hide-menu': !isMenuVisible }">
   
     <Header :title="titulo"  :hideToggle="false"></Header>
     <Main></Main>  
@@ -8,6 +9,8 @@
 
                
   </div>
+    </v-app>
+
 </template>
 <script>
 
@@ -73,5 +76,8 @@ export default {
 			"content content"
 			"footer footer";
 	}
+  .v-application a {
+    color: #e0e0e0 !important;
+}
 </style>
 
