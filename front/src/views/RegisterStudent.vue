@@ -1,205 +1,166 @@
 <template>
   <div>
-    <b-form>
-      <input id="alunos-id" type="hidden" v-model="alunos.id" />
-      <b-row>
-        <b-col md="3" sm="12">
-          <b-form-group label="Nome do aluno:" label-for="alunos-nome">
-            <b-form-input
-              name="Nome"
-              id="alunos-nome"
-              type="text"
-              v-model="alunos.name"
-              placeholder="Informe o Nome do Aluno..."
-            />
-          </b-form-group>
+    <v-card class="mx-auto" max-width="100%" color="teal" outlined>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <h2 v-if="editMode" class="card-title" id="updateStudentLabel">
+            Atualizar Auno
+          </h2>
+          <h2 v-else class="card-title" id="newStudentLabel">
+            Cadastrar Aluno
+          </h2>
+          <hr />
+          <v-list-item-title class="headline mb-1">
+            <b-form>
+              <input id="students-id" type="hidden" v-model="students.id" />
+              <b-row>
+                <b-col md="12" sm="12">
+                  <b-form-group
+                    label="Nome do aluno:"
+                    label-for="students-nome"
+                  >
+                    <b-form-input
+                      name="name"
+                      id="students-nome"
+                      type="text"
+                      v-model="students.name"
+                      required
+                      placeholder="Informe o nome completo"
+                    />
+                  </b-form-group>
+                </b-col>
+
+                <b-col md="12" sm="12">
+                  <b-form-group label="E-mail:" label-for="students-nome">
+                    <b-form-input
+                      name="email"
+                      id="students-email"
+                      type="email"
+                      v-model="students.email"
+                      required
+                      placeholder="Informe apenas um email"
+                    />
+                  </b-form-group>
+                </b-col>
+
+                <b-col md="12" sm="12">
+                  <b-form-group
+                    label="RA do aluno:"
+                    label-for="students-academic_record"
+                  >
+                    <b-form-input
+                      name="academic_record"
+                      id="students-academic_record"
+                      type="number"
+                      required
+                      :disabled="editMode"
+                      v-model="students.academic_record"
+                      placeholder="Informe o registo acadêmico"
+                    />
+                  </b-form-group>
+                </b-col>
+
+                <b-col md="12" sm="12">
+                  <b-form-group label="CPF:" label-for="students-cpf">
+                    <b-form-input
+                      name="cpf"
+                      id="students-cpf"
+                      v-mask="'###.###.###-##'"
+                      required
+                      :disabled="editMode"
+                      type="text"
+                      v-model="students.cpf"
+                      placeholder="Informe o número do documento"
+                    />
+                  </b-form-group>
+                </b-col>
+              </b-row>
+            </b-form>
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-card-actions>
+        <b-col xs="12">
+          <b-button v-if="editMode" variant="primary" @click="updateStudent"
+            >Atualizar <v-icon>mdi-pencil</v-icon></b-button
+          >
+          <b-button v-else variant="primary" @click="createStudent"
+            >Salvar
+            <v-icon dark right> mdi-checkbox-marked-circle </v-icon></b-button
+          >
+          <b-button variant="danger" class="ml-2" @click="reset"
+            >Cancelar
+          </b-button>
         </b-col>
-
-        <b-col md="3" sm="12">
-          <b-form-group label="E-mail:" label-for="alunos-nome">
-            <b-form-input
-              name="email"
-              id="alunos-email"
-              type="text"
-              v-model="alunos.email"
-              placeholder="Informe o email do Aluno..."
-            />
-          </b-form-group>
-        </b-col>
-  
-        <b-col md="3" sm="12">
-          <b-form-group label="RA do aluno:" label-for="alunos-registo_academico">
-            <b-form-input
-              name="registo_academico"
-              id="alunos-registo_academico"
-              type="text"
-              v-model="alunos.name"
-              placeholder="Informe o Registo Academico do Aluno..."
-            />
-          </b-form-group>
-        </b-col>
- 
-        <b-col md="3" sm="12">
-          <b-form-group label="Nome do aluno:" label-for="alunos-nome">
-            <b-form-input
-              name="Nome"
-              id="alunos-nome"
-              type="text"
-              v-model="alunos.name"
-              placeholder="Informe o Nome do Aluno..."
-            />
-          </b-form-group>
-        </b-col>
-      </b-row>
-      <b-col xs="12">
-        <b-button variant="primary" v-if="mode === 'save'" @click="save"
-          >Salvar</b-button
-        >
-        <b-button
-          variant="success"
-          v-if="mode === 'atualizar'"
-          @click="atualizar"
-          >Atualizar</b-button
-        >
-        <b-button class="ml-2" @click="reset">Cancelar</b-button>
-      </b-col>
-    </b-form>
-    <hr />
-    <b-table
-      hover
-      striped
-      :items="aluno"
-      :fields="fields"
-      :sort-by.sync="sortBy"
-      :sort-desc.sync="sortDesc"
-      :busy="isBusy"
-    >
-      <template #cell(actions)="row">
-
-     
-       <v-btn color="blue"  @click="loadAlunoModo(row.item)"  >Accept
-        <v-icon dark right>check_circle</v-icon>
-      </v-btn>
-      
-
-      </template>
-        
-
-
-      <template #table-busy>
-        <div class="text-center text-danger my-2">
-          <b-spinner class="align-middle"></b-spinner>
-          <strong>Loading...</strong>
-        </div>
-      </template>
-      
-        
-    </b-table>
-    <div>
-      Sorting By: <b>{{ sortBy }}</b
-      >, Sort Direction:
-      <b>{{ sortDesc ? "Descending" : "Ascending" }}</b>
-    </div>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { baseApiUrl, showError } from "@/globalSettings";
+import { validate } from "gerador-validador-cpf";
 
 export default {
+  editMode: false,
   name: "RegisterStudent",
   components: {},
   data: function () {
     return {
-      mode: "save",
-      sortBy: "name",
-      sortDesc: false,
-      alunos: {},
-      isBusy:false,
-      aluno: [],
-      fields: [
-        {
-          key: "name",
-          label: "Nome do Aluno",
-          sortable: true,
-
-          formatter: (value) => value.toUpperCase(),
-        },
-        {
-          key: "email",
-          label: "E-mail",
-          sortable: true,
-          formatter: (value) => value.toUpperCase(),
-        },
-        { key: "id", label: "RA",  sortable: true },
-        { key: "role", label: "CPF",  sortable: true },
-        { key: "actions", label: "Ações" },
-      ],
+      students: {},
+      id: this.$route.query.aluno ? this.$route.query.aluno : null,
     };
   },
   methods: {
-     toggleBusy() {
-        this.isBusy = !this.isBusy
-      },
     reset() {
-      this.mode = "save";
-      this.alunos = {};
-      this.loadalunos();
-    },
-    save() {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          axios[method](`${baseApiUrl}/alunos/`, this.alunos)
-            .then(() => {
-              this.$toasted.global.defaultSuccess({
-                msg: "Aluno cadastrada com sucesso!",
-              });
-              this.reset();
-            })
-            .catch(showError);
-          return;
-        }
-        this.$toasted.global.defaultError({
-          msg: "Você possui problemas no formulário",
-        });
-      });
-      const method = this.alunos.id ? "put" : "post";
-      //const id = this.alunos.id ? `/${this.alunos.id}` : "";
-    },
-    atualizar() {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          axios
-            .put(`${baseApiUrl}/alunos/atualizar`, this.alunos, {
-              useCredentails: true,
-            })
-            .then(() => {
-              this.$toasted.global.defaultSuccess({
-                msg: "Raca Atualizada com sucesso!",
-              });
-              this.reset();
-            })
-            .catch(showError);
-          return;
-        }
-        this.$toasted.global.defaultError({
-          msg: "Você possui problemas no formulário",
-        });
+      this.$router.push({
+        name: "ConsultStudent",
       });
     },
-    loadalunos() {
-      axios.get(`${baseApiUrl}/user`).then((res) => (this.aluno = res.data));
+    createStudent() {
+      axios
+        .post(`${baseApiUrl}/student/`, this.students)
+        .then(() => {
+          this.$toasted.global.defaultSuccess({
+            msg: "Aluno cadastrada com sucesso!",
+          });
+        })
+        .catch(showError);
     },
 
-    loadAlunoModo(alunos, mode = "atualizar") {
-      this.mode = mode;
-      this.alunos = { ...alunos };
+    loadStudent() {
+      axios
+        .get(`${baseApiUrl}/student/` + this.id)
+        .then((res) => (this.students = res.data))
+        .catch(() => {
+          this.$toasted.global.defaultError({
+            msg: "Nenhum aluno encontrado",
+          });
+        });
+    },
+
+    updateStudent() {
+      axios
+        .put(`${baseApiUrl}/student/`, this.students)
+        .then(() => {
+          this.$toasted.global.defaultSuccess({
+            msg: "Aluno atualizado com sucesso!",
+          });
+        })
+        .catch(showError);
     },
   },
-  watch: {},
-  mounted() {
-    this.loadalunos();
+  computed: {
+    editMode() {
+      if (this.id === null) {
+        return false;
+      } else {
+        this.loadStudent();
+        return true;
+      }
+    },
   },
 };
 </script>
