@@ -95,7 +95,7 @@ import axios from "axios";
 import { baseApiUrl, showError } from "@/globalSettings";
 
 export default {
-  name: "RegisterStudent",
+  name: "ConsultStudent",
   components: {},
   data: function () {
     return {
@@ -124,7 +124,7 @@ export default {
           sortable: true,
           formatter: (value) => value.toUpperCase(),
         },
-        { key: "registro_academico", label: "RA", sortable: true },
+        { key: "academic_record", label: "RA", sortable: true },
         { key: "cpf", label: "CPF", sortable: true },
         { key: "actions", label: "Ações" },
       ],
@@ -149,7 +149,7 @@ export default {
     },
     newStudent() {
         this.$router.push({
-            name: "RegisterStudent",
+            name: "Students",
         });
     },
     reset() {
@@ -192,7 +192,7 @@ export default {
     editStudent(student, mode = "atualizar") {
       this.mode = mode;
       this.$router.push({
-            name: "RegisterStudent",
+            name: "Students",
             query: { aluno: student.id },
         });
     },

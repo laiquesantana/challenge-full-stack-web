@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import RegisterStudent from '../views/RegisterStudent.vue'
+import Students from '../views/Students.vue'
 import ConsultStudent from '../views/ConsultStudent.vue'
 import NotFound from '../views/NotFound.vue'
 
@@ -10,8 +10,8 @@ const routes = [
   
   {
     path: '/cadastrar-aluno',
-    name: 'RegisterStudent',
-    component: RegisterStudent
+    name: 'Students',
+    component: Students
   },
 
   {

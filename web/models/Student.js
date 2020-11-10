@@ -139,10 +139,7 @@ class Student{
                 editStudent.name = name;
             }
 
-            if(cpf != undefined){
-                editStudent.cpf = cpf;
-            }
-
+          
 
             try{
                 await knex.update(editStudent).where({id: id}).table("students");
