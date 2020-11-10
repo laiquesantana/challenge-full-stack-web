@@ -1,5 +1,5 @@
 <template>
-  <v-app id="application" :class="{'hide-menu': !isMenuVisible }">
+  <v-app id="application" >
           <div id="app" :class="{'hide-menu': !isMenuVisible }">
   
     <Header :title="titulo"  :hideToggle="false"></Header>
