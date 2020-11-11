@@ -1,5 +1,25 @@
 GrupoA Educação - Full Stack Web Developer
 ===================
+### Dependências
+* npm, node recomendável ultima versão lts
+* servidor web rodando na maquina com mysql
+* ferramenta de banco de dados 
+
+### Instruções para compilar o projeto
+* 1º fazer o clone do projeto : https://github.com/laiquesantana/challenge-full-stack-web
+* 2º acessando  o banco de dados mysql usando a sua ferramenta de preferência rodar o script que se encontra na pasta *  challenge-full-stack-web/db  com nome database.sql
+* 3º challenge-full-stack-web\web\database\connection.js  configurar o banco de dados alterando o password  e user do seu mysql local
+não alterar as demais configurações
+* 4º acessando a pasta  challenge-full-stack-web/web rodar o comando npm install
+* 5º  acessando a pasta challenge-full-stack-web/front npm install para instalar as dependências
+* 6º  acessando a pasta challenge-full-stack-web/web subir o servidor utilizando o comando npm start
+* 7º  acessando a pasta challenge-full-stack-web/front subir a aplicação  usando o comando npm run serve
+* 8º Acessar no navegador a aplicação http://localhost:8080/consultar-aluno
+
+
+
+### Instruções para rodar os testes
+* 1º acessando a pasta  challenge-full-stack-web/web rodar o comando npm test
 
 [![N|Solid](https://www.grupoa.com.br/hs-fs/hubfs/logo-grupoa.png?width=300&name=logo-grupoa.png)](https://www.grupoa.com.br) 
 

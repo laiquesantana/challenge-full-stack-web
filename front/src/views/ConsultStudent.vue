@@ -87,7 +87,7 @@
 
 <script>
 import axios from "axios";
-import { baseApiUrl, showError } from "@/globalSettings";
+import { baseApiUrl } from "@/globalSettings";
 
 export default {
   name: "ConsultStudent",
@@ -165,11 +165,11 @@ export default {
           //send request to the server
           axios
             .delete(`${baseApiUrl}/student/` + id)
-            .then((response) => {
+            .then(() => {
               this.$swal("Deletado!", "Aluno deletado com sucesso!", "success");
               this.loadStudents();
             })
-            .catch((error) => {
+            .catch(() => {
               this.$swal("Falha!", "Problema ao deletar aluno", "error");
             });
         }
@@ -191,7 +191,7 @@ export default {
   },
   watch: {
 
-    search(newValue, OldValue) {
+    search(newValue) {
       if (newValue === "" || newValue === null || newValue === undefined) {
         this.loadStudents();
       }
