@@ -29,7 +29,7 @@
               :disabled="loading1"
               color="success"
               class="ma-2 white--text"
-              @click="loader = 'loading'"
+              @click="searchit"
             >
               Pesquisar
             </v-btn>
@@ -134,7 +134,9 @@ export default {
       } else {
         axios
           .get(`${baseApiUrl}/student/query/` + query)
-          .then((res) => (this.student = res.data))
+          .then((res) => (this.student = res.data,
+           this.$toasted.global.defaultSuccess()
+          ))
           .catch(() => {
             this.$toasted.global.defaultError({
               msg: "Nenhum aluno encontrado",
@@ -165,11 +167,9 @@ export default {
             .delete(`${baseApiUrl}/student/` + id)
             .then((response) => {
               this.$swal("Deletado!", "Aluno deletado com sucesso!", "success");
-              console.log(response);
               this.loadStudents();
             })
             .catch((error) => {
-              console.log(error);
               this.$swal("Falha!", "Problema ao deletar aluno", "error");
             });
         }
@@ -190,15 +190,6 @@ export default {
     },
   },
   watch: {
-    loader() {
-      const l = this.loader;
-      this[l] = !this[l];
-
-      setTimeout(() => (this[l] = false), 1000);
-
-      this.searchit();
-      this.loader = null;
-    },
 
     search(newValue, OldValue) {
       if (newValue === "" || newValue === null || newValue === undefined) {
