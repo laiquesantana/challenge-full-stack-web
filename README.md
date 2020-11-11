@@ -7,14 +7,13 @@ GrupoA Educação - Full Stack Web Developer
 
 ### Instruções para compilar o projeto
 * 1º fazer o clone do projeto : https://github.com/laiquesantana/challenge-full-stack-web
-* 2º acessando  o banco de dados mysql usando a sua ferramenta de preferência rodar o script que se encontra na pasta *  challenge-full-stack-web/db  com nome database.sql
-* 3º challenge-full-stack-web\web\database\connection.js  configurar o banco de dados alterando o password  e user do seu mysql local
-não alterar as demais configurações
+* 2º acessando  o banco de dados mysql usando a sua ferramenta de preferência rodar o script que se encontra na pasta challenge-full-stack-web/db  com nome database.sql
+* 3º navegar até a pasta challenge-full-stack-web\web\database\connection.js  configurar o banco de dados alterando o password  e user do seu mysql local não alterar as demais configurações
 * 4º acessando a pasta  challenge-full-stack-web/web rodar o comando npm install
 * 5º  acessando a pasta challenge-full-stack-web/front npm install para instalar as dependências
 * 6º  acessando a pasta challenge-full-stack-web/web subir o servidor utilizando o comando npm start
 * 7º  acessando a pasta challenge-full-stack-web/front subir a aplicação  usando o comando npm run serve
-* 8º Acessar no navegador a aplicação http://localhost:8080/consultar-aluno
+* 8º Acessar no navegador a aplicação http://localhost:8080/consultar-aluno ou em outra porta o front esteja rodando
 
 
 

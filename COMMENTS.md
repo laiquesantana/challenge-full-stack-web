@@ -5,6 +5,7 @@ GrupoA Educação - Full Stack Web Developer - Laíque Santana
 tentando focar no reuso e na separação de responsabilidades entre as classes e métodos evitando code smells.
 utilizando uma camada de models onde eu  permito o acesso para os dados serem coletados, gravados e, exibidos
 os controllers fazendo a mediação enviando ações para o models a partir das requições feitas pelo frontend via API
+utilizei o knex para trabalhar de forma mais rapida com as operações de CRUD
 
 # Lista de bibliotecas de terceiros utilizadas
 - **SweetAlert2
