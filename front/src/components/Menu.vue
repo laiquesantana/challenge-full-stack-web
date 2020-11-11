@@ -1,9 +1,43 @@
 <template>
-    <aside class="menu" v-show="isMenuVisible" > 
-            <router-link :to="{ name: 'ConsultStudent' }" class="nav-link">
-                <i class="fa fa-home"></i> Alunos
-            </router-link>
-    </aside>
+  
+
+    <v-navigation-drawer
+        permanent
+        class="menu"
+        v-show="isMenuVisible"
+        width="100%"
+        light
+      >
+        <v-list>
+          <v-list-item class="px-2">
+            <v-list-item-avatar>
+              <v-img src="https://randomuser.me/api/portraits/men/81.jpg"></v-img>
+            </v-list-item-avatar>
+          </v-list-item>
+
+     
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list
+          nav
+          dense
+        >
+       
+          <v-list-item link>
+            <v-list-item-icon>
+              <v-icon>mdi-account-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+                <router-link :to="{ name: 'ConsultStudent' }" class="nav-link">
+                    Alunos
+                </router-link>
+            </v-list-item-title>
+          </v-list-item>
+      
+        </v-list>
+      </v-navigation-drawer>
 </template>
 
 <script>
@@ -24,7 +58,7 @@ export default {
 <style>
     .menu {
         grid-area: menu;
-        background: linear-gradient(to right, #232526, #414345);
+        background: linear-gradient(to right, #1e469a, #49a7c1);
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;

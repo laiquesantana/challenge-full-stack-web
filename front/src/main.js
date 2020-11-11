@@ -6,10 +6,7 @@ import router from './router';
 import vuetify from './plugins/vuetify';
 import store from './config/store';
 import './config/bootstrap';
-import vueResource from 'vue-resource';
 import VueProgressBar from 'vue-progressbar'
-import { ValidationProvider, extend } from 'vee-validate';
-import { required } from 'vee-validate/dist/rules';
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 import Vuetify from 'vuetify'
@@ -24,8 +21,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueMask);
 
 
-window._ = require('lodash');
-
 
 
 window.Vue = require('vue');
@@ -38,13 +33,6 @@ Vue.use(Vuetify, {
 
 })
 
-extend('required', {
-  ...required,
-  message: 'Este Campo é Obrigatório!'
-});
-
-
-Vue.use(vueResource)
 
 Vue.use(VueSweetalert2);
 
@@ -75,13 +63,9 @@ Vue.component('UserDropDown', require('./components/UserDropDown.vue').default);
 Vue.component('Footer', require('./components/Footer.vue').default);
 
 
-Vue.filter('upText',function(text){
-  return text.charAt(0).toUpperCase() + text.slice(1);
-});
 
 new Vue({
   router,
-  ValidationProvider,
   store,
   vuetify,
  render: h => h(App)

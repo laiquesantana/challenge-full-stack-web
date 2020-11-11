@@ -1,54 +1,49 @@
 <template>
   <div>
-      <v-card  
+    <v-card>
+      <v-container>
+        <v-row>
+          <v-col cols="6">
+            <v-text-field
+              v-model="search"
+              outlined
+              clearable
+              label="Pesquisar"
+              type="text"
             >
+              <template v-slot:append>
+                <v-fade-transition leave-absolute>
+                  <v-progress-circular
+                    v-if="loading"
+                    size="24"
+                    color="info"
+                    indeterminate
+                  ></v-progress-circular>
+                </v-fade-transition>
+              </template>
+            </v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-btn
+              :loading="loading1"
+              :disabled="loading1"
+              color="success"
+              class="ma-2 white--text"
+              @click="loader = 'loading'"
+            >
+              Pesquisar
+            </v-btn>
+             <v-btn color="primary" class="ma-2 white--text" @click="newStudent">
+              Cadastrar Aluno
+            </v-btn>
+          </v-col>
 
-    <v-container>
-      <v-row>
-        <v-col cols="6">
-          <v-text-field
-            v-model="search"
-            outlined
-            clearable
-            label="Pesquisar"
-            type="text"
-          >
-            <template v-slot:append>
-              <v-fade-transition leave-absolute>
-                <v-progress-circular
-                  v-if="loading"
-                  size="24"
-                  color="info"
-                  indeterminate
-                ></v-progress-circular>
-              </v-fade-transition>
-            </template>
-          </v-text-field>
-        </v-col>
-        <v-col cols="3">
-          <v-btn
-            :loading="loading1"
-            :disabled="loading1"
-            color="success"
-            class="ma-2 white--text"
-            @click="loader = 'loading'"
-          >
-            Pesquisar
-          </v-btn>
-        </v-col>
-
-            <v-col cols="3">
-          <v-btn
-            color="primary"
-            class="ma-2 white--text"
-            @click="newStudent"
-          >
-            Cadastrar Aluno
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-      </v-card>
+          <v-col cols="3">
+           
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
 
     <hr />
     <b-table
@@ -61,7 +56,6 @@
       :busy="isBusy"
     >
       <template #cell(actions)="row">
-          
         <v-btn class="mr-2" color="warning" @click="editStudent(row.item)" dark
           >Editar
           <v-icon dark right>edit</v-icon>
@@ -149,14 +143,9 @@ export default {
       }
     },
     newStudent() {
-        this.$router.push({
-            name: "Students",
-        });
-    },
-    reset() {
-      this.mode = "save";
-      this.students = {};
-      this.loadStudents();
+      this.$router.push({
+        name: "Students",
+      });
     },
 
     deleteStudent(id) {
@@ -187,15 +176,17 @@ export default {
       });
     },
     loadStudents() {
-      axios.get(`${baseApiUrl}/student`).then((res) => (this.student = res.data));
+      axios
+        .get(`${baseApiUrl}/student`)
+        .then((res) => (this.student = res.data));
     },
 
     editStudent(student, mode = "atualizar") {
       this.mode = mode;
       this.$router.push({
-            name: "Students",
-            query: { aluno: student.id },
-        });
+        name: "Students",
+        query: { aluno: student.id },
+      });
     },
   },
   watch: {
@@ -207,6 +198,12 @@ export default {
 
       this.searchit();
       this.loader = null;
+    },
+
+    search(newValue, OldValue) {
+      if (newValue === "" || newValue === null || newValue === undefined) {
+        this.loadStudents();
+      }
     },
   },
   mounted() {

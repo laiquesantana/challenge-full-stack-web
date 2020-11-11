@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-card class="mx-auto" max-width="100%" color="#49A7C0" outlined>
+     
+    <v-card class="mx-auto" max-width="100%" color="" outlined>
       <v-list-item three-line>
         <v-list-item-content>
           <h2 v-if="editMode" class="card-title" id="updateStudentLabel">
@@ -11,89 +12,90 @@
           </h2>
           <hr />
           <v-list-item-title class="headline mb-1">
-            <b-form>
-              <input id="students-id" type="hidden" v-model="students.id" />
-              <b-row>
-                <b-col md="12" sm="12">
-                  <b-form-group
-                    label="Nome do Aluno:"
-                    label-for="students-nome"
-                  >
-                    <b-form-input
-                      name="name"
-                      id="students-nome"
-                      type="text"
-                      v-model="students.name"
-                      required
-                      placeholder="Informe o nome completo"
-                    />
-                  </b-form-group>
-                </b-col>
+          
+             <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    <v-text-field
+      v-model="students.name"
+      :counter="255"
+      :rules="nameRules"
+      color="teal"
+      label="Nome"
+      required
+    ></v-text-field>
 
-                <b-col md="12" sm="12">
-                  <b-form-group label="E-mail:" label-for="students-nome">
-                    <b-form-input
-                      name="email"
-                      id="students-email"
-                      type="email"
-                      v-model="students.email"
-                      required
-                      placeholder="Informe apenas um email"
-                    />
-                  </b-form-group>
-                </b-col>
+    <v-text-field
+      v-model="students.email"
+      :rules="emailRules"
+      label="E-mail"
+      :counter="150"
+      required
+    ></v-text-field>
 
-                <b-col md="12" sm="12">
-                  <b-form-group
-                    label="RA do Aluno:"
-                    label-for="students-academic_record"
-                  >
-                    <b-form-input
-                      name="academic_record"
-                      id="students-academic_record"
-                      type="number"
-                      required
-                      :disabled="editMode"
-                      v-model="students.academic_record"
-                      placeholder="Informe o registo acadêmico"
-                    />
-                  </b-form-group>
-                </b-col>
+    <v-text-field
+      v-model="students.academic_record"
+      :rules="raRules"
+      label="Registro Acadêmico"
+      color="primary"
+      :counter="50"
+      :required="editMode"
+      :disabled="editMode"
+    ></v-text-field>
 
-                <b-col md="12" sm="12">
-                  <b-form-group label="CPF:" label-for="students-cpf">
-                    <b-form-input
-                      name="cpf"
-                      id="students-cpf"
-                      v-mask="'###.###.###-##'"
-                      required
-                      :disabled="editMode"
-                      type="text"
-                      v-model="students.cpf"
-                      placeholder="Informe o número do documento"
-                    />
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </b-form>
+    
+    <v-text-field
+      class="pt-2"
+      v-model="students.cpf"
+      :rules="cpfRules"
+      :counter="14"
+      label="CPF"
+      color="purple"
+      v-mask="'###.###.###-##'"
+      :required="editMode"
+      :disabled="editMode"
+    ></v-text-field>
+
+  <br><hr>
+
+    <v-btn
+      :disabled="!valid"
+      v-if="editMode"
+      color="success"
+      class="mr-4"
+      @click="updateStudent"
+    >
+      Atualizar <v-icon>mdi-pencil</v-icon>
+    </v-btn>
+
+    <v-btn
+      :disabled="!valid"
+      v-else
+      color="success"
+      class="mr-4"
+      @click="createStudent"
+    >
+      Salvar    <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
+    </v-btn>
+
+ 
+
+ 
+
+    <v-btn
+      color="red"
+      @click="reset"
+    >
+      Cancelar
+    </v-btn>
+  </v-form>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
-      <v-card-actions>
-        <b-col xs="12">
-          <b-button v-if="editMode" variant="success" @click="updateStudent"
-            >Atualizar <v-icon>mdi-pencil</v-icon></b-button
-          >
-          <b-button v-else variant="success" @click="createStudent"
-            >Salvar
-            <v-icon dark right> mdi-checkbox-marked-circle </v-icon></b-button
-          >
-          <b-button variant="danger" class="ml-2" @click="reset"
-            >Cancelar
-          </b-button>
-        </b-col>
-      </v-card-actions>
+    
     </v-card>
   </div>
 </template>
@@ -109,11 +111,34 @@ export default {
   components: {},
   data: function () {
     return {
+      valid: true,
+      nameRules: [
+        v => !!v || 'O nome do aluno é obrigatorio !',
+        v => (v && v.length <= 255) || 'Nome deve possuir até 255 caracteres',
+      ],
+      raRules: [
+        v => !!v || 'O Registro acadêmico do aluno é obrigatorio !',
+        v => (v && v.length <= 50) || 'O Registro acadêmico deve possuir até 255 caracteres',
+      ],
+
+       cpfRules: [
+        v => !!v || 'O CPF do aluno é obrigatorio !',
+        v => (v && v.length <= 14) || 'O CPF deve possuir até 255 caracteres',
+      ],
+
+      emailRules: [
+        v => !!v || 'O E-mail do aluno é obrigatorio! ',
+        v => /.+@.+\..+/.test(v) || 'E-mail deve ser um E-mail válido',
+        v => (v && v.length <= 150) || 'O E-mail deve possuir até 255 caracteres',
+      ],
+      select: null,
+     
       students: {},
       id: this.$route.query.aluno ? this.$route.query.aluno : null,
     };
   },
   methods: {
+    
     reset() {
       this.$router.push({
         name: "ConsultStudent",

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `passwordtokens` (
 
 CREATE TABLE IF NOT EXISTS `students` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT '0',
+  `name` varchar(255) DEFAULT '0',
   `academic_record` varchar(50) DEFAULT '0',
   `email` varchar(150) NOT NULL DEFAULT '0',
   `cpf` varchar(11) NOT NULL DEFAULT 0,
