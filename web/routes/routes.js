@@ -7,6 +7,7 @@ var UserController = require("../controllers/UserController");
 var StudentController = require("../controllers/StudentController");
 var AdminAuth = require("../middleware/AdminAuth");
 
+
 app.use(cors())
 
 app.use((req, res, next) => {
@@ -48,5 +49,6 @@ router.get("/student/:id",StudentController.findStudent);
 router.get("/student/query/:query?",StudentController.findStudentQuery);
 router.put("/student",StudentController.edit);
 router.delete("/student/:id",StudentController.remove);
+
 
 module.exports = router;

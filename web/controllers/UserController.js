@@ -9,7 +9,6 @@ var bcrypt = require("bcrypt");
 
 class UserController{
     async index(req, res){
-        res.setHeader('Access-Control-Allow-Origin', '*');
 
 
         var users = await User.findAll();
@@ -17,7 +16,6 @@ class UserController{
     }
 
     async findUser(req, res){
-        res.setHeader('Access-Control-Allow-Origin', '*');
         var id = req.params.id;
         var user = await User.findById(id);
         if(user == undefined){
@@ -30,7 +28,6 @@ class UserController{
     }
 
     async findUserQuery(req, res){
-        res.setHeader('Access-Control-Allow-Origin', '*');
         var query = req.params.query;
         var user = await User.findByQuery(query);
         if(user == undefined){

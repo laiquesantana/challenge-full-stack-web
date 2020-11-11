@@ -1,8 +1,4 @@
 var knex = require("../database/connection");
-var bcrypt = require("bcrypt");
-const PasswordToken = require("./PasswordToken");
-
-const required_inputs = ['name','email','cpf','academic_record']
 
 class Student{
 
@@ -129,13 +125,12 @@ class Student{
 
             var editStudent = {};
 
-            if(email != undefined){ 
+            if(name != undefined || name != ''){
                 
                 editStudent.email = email;
                  
             }
-
-            if(name != undefined){
+            if(name != undefined || name != ''|| isNaN(name)){
                 editStudent.name = name;
             }
 
