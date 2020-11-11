@@ -1,6 +1,7 @@
 GrupoA Educação - Full Stack Web Developer - Laíque Santana
 ===================
 #Decisão da arquitetura utilizada
+- **
 no backend  decidir utilizar uma estrutura estilo mvc, com rotas, models e controller
 tentando focar no reuso e na separação de responsabilidades entre as classes e métodos evitando code smells.
 utilizando uma camada de models onde eu  permito o acesso para os dados serem coletados, gravados e, exibidos
